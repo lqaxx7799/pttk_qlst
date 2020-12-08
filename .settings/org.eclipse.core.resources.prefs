@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/tags/layout.tag=UTF-8
+encoding//src/servlet/BrowseInvoiceServlet.java=UTF-8
+encoding//src/servlet/CartDetailServlet.java=UTF-8
+encoding//src/servlet/ItemReportDetailServlet.java=UTF-8
+encoding//src/servlet/ItemReportServlet.java=UTF-8
+encoding//src/servlet/SearchItemServlet.java=UTF-8
+encoding//src/servlet/WaitingInvoiceDetailServlet.java=UTF-8
+encoding//src/servlet/YourInvoiceServlet.java=UTF-8
