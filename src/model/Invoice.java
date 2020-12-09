@@ -9,6 +9,9 @@ public class Invoice {
 	private String status;
 	private boolean isDeleted;
 	private Employee exportEmployee;
+	private String paymentMethod;
+	private String creditCard;
+	private String deliveryAddress;
 
 	public int getId() {
 		return id;
@@ -56,6 +59,30 @@ public class Invoice {
 
 	public void setExportEmployee(Employee exportEmployee) {
 		this.exportEmployee = exportEmployee;
+	}
+
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getCreditCard() {
+		return creditCard;
+	}
+
+	public void setCreditCard(String creditCard) {
+		this.creditCard = creditCard;
+	}
+
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 
 }

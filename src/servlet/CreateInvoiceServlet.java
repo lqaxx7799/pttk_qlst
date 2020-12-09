@@ -59,14 +59,11 @@ public class CreateInvoiceServlet extends HttpServlet {
 		InvoiceDetailDAO invoiceDetailDAO = new InvoiceDetailDAO();
 		
 		String paymentMethod = request.getParameter("txtPaymentMethod");
-		String receiveAddress = request.getParameter("txtReceiveAddress");
+		String creditCard = request.getParameter("txtCreditCard");
+		String deliveryAddress = request.getParameter("txtDeliveryAddress");
 		
 		String[] itemIds = request.getParameterValues("txtItemId");
 		String[] quantities = request.getParameterValues("txtQuantity");
-		
-		System.out.println(paymentMethod + " " + receiveAddress);
-		System.out.println(itemIds[0] + " " + itemIds[1]);
-		System.out.println(quantities[0] + " " + quantities[1]);
 		
 		HttpSession session = request.getSession();
 		Account account = accountDAO.getByEmail((String) session.getAttribute("email"));
@@ -77,6 +74,11 @@ public class CreateInvoiceServlet extends HttpServlet {
 		invoice.setDeleted(false);
 		invoice.setStatus("WAITING");
 		invoice.setExportEmployee(null);
+		invoice.setPaymentMethod(paymentMethod);
+		if (paymentMethod.equals("online")) {			
+			invoice.setCreditCard(creditCard);
+		}
+		invoice.setDeliveryAddress(deliveryAddress);
 		
 		int invoiceId = invoiceDAO.insert(invoice);
 		invoice.setId(invoiceId);
@@ -99,7 +101,7 @@ public class CreateInvoiceServlet extends HttpServlet {
 		session.removeAttribute("cart");
 		
 		response.setContentType("application/json");
-		response.getWriter().write("{}");
+		response.getWriter().write("{ \"id\": " + invoiceId + " }");
 	}
 
 }

@@ -52,15 +52,30 @@
 			<div class="field">
 				<label class="label">Phương thức thanh toán</label>
 			 	<div class="control">
-			    	aaaaa
+			 		<c:if test="${invoice.paymentMethod eq 'direct'}">
+			 			Thanh toán khi nhận hàng
+			 		</c:if>
+			    	<c:if test="${invoice.paymentMethod eq 'online'}">
+			 			Thanh toán online
+			 		</c:if>
 			  	</div>
 			</div>
 		</div>
+		<c:if test="${invoice.paymentMethod eq 'online'}">
+			<div style="margin-top: 20px">
+				<div class="field">
+					<label class="label">Thẻ tín dụng</label>
+				 	<div class="control">
+				    	${invoice.creditCard}
+				  	</div>
+				</div>
+			</div>
+		</c:if>
 		<div style="margin-top: 20px">
 			<div class="field">
 				<label class="label">Địa chỉ nhận hàng</label>
 				<div class="control">
-					bbb
+					${invoice.deliveryAddress}
 				</div>
 			</div>
 		</div>

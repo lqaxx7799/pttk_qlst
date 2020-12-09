@@ -57,6 +57,7 @@ public class AddToCartServlet extends HttpServlet {
 	
 		Item item = itemDAO.getById(itemId);
 		HttpSession session = request.getSession();
+		int number = 0;
 		if (session.getAttribute("cart") == null) {
 			ArrayList<Cart> carts = new ArrayList<>();
 			Cart cart = new Cart();
@@ -64,6 +65,7 @@ public class AddToCartServlet extends HttpServlet {
 			cart.setQuantity(quantity);
 			carts.add(cart);
 			session.setAttribute("cart", carts);
+			number = 1;
 		} else {
 			@SuppressWarnings("unchecked")
 			ArrayList<Cart> carts = (ArrayList<Cart>) session.getAttribute("cart");
@@ -82,13 +84,14 @@ public class AddToCartServlet extends HttpServlet {
 				carts.add(cart);
 			}
 			session.setAttribute("cart", carts);
+			number = carts.size();
 		}
 		
 		System.out.println(itemId + " " + quantity);
 		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		out.write("{}");
+		out.write("{ \"number\": " + number + " }");
 	}
 
 }

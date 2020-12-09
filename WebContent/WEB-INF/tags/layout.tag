@@ -58,7 +58,7 @@
 				</c:if>
 				<c:if test='${not empty sessionScope.email and sessionScope.role eq "customer"}'>
 					<a class="navbar-item" href="./SearchItem">Tìm kiếm mặt hàng</a>
-					<a class="navbar-item" href="./CartDetail">
+					<a class="navbar-item" href="./CartDetail" id="btnCartDetail">
 						Giỏ hàng
 						<c:if test="${not empty sessionScope.cart}">&nbsp;
 							<span class="tag is-primary">${sessionScope.cart.size()}</span>

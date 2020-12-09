@@ -10,7 +10,7 @@
 			<form action="./SearchItem">
 				<div style="margin-bottom: 20px; display: flex; width: 500px">
 					<input type="text" class="input" name="q" value="${param.q}">
-					<button type="submit" class="button is-info">Tìm kiếm</button>
+					<button type="submit" class="button is-info">Tìm</button>
 				</div>
 			</form>
 			<c:if test="${empty items}">
@@ -85,6 +85,12 @@
 	                	console.log(response)
 	                	toastr['info']('Thêm mặt hàng vào giỏ thành công');
 	                	$(`input[data-id="\${itemId}"]`).val('');
+	                	const numberElement = $('#btnCartDetail > span');
+	                	if (numberElement.length) {
+		                		numberElement.text(response.number);
+	                	} else {
+	                		$('#btnCartDetail').append('&nbsp;<span class="tag is-primary">1</span>')
+	                	}
 	                }
 				});
 			});

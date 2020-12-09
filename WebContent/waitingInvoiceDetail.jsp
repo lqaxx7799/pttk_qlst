@@ -10,8 +10,8 @@
 			<div>
 				<strong>Mã đơn hàng: </strong><span>${invoice.id}</span><br/>
 				<strong>Tổng tiền: </strong><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalMoney}" />đ</span><br/>
-				<strong>Địa chỉ nhận hàng: </strong><span>aaaa</span><br/>
-				<strong>Phương thức thanh toán: </strong><span>bbbb</span><br/>
+				<strong>Địa chỉ nhận hàng: </strong><span>${invoice.deliveryAddress}</span><br/>
+				<strong>Phương thức thanh toán: </strong><span>${invoice.paymentMethod}</span><br/>
 				<strong>Chi tiết đơn hàng: </strong>
 			</div>
 		</div>

@@ -15,10 +15,10 @@ public class InvoiceDAO extends DAO {
 	private static final String SELECT_ALL_SQL_STATEMENT = "select * from tblInvoice";
 	private static final String SELECT_WAITING_SQL_STATEMENT = "select * from tblInvoice where status = 'WAITING'";
 	private static final String SELECT_ONE_SQL_STATEMENT = "select * from tblInvoice where id = ?";
-	private static final String INSERT_SQL_STATEMENT = "insert into tblInvoice(created_time, customer_id, status, export_employee_id, is_deleted)"
-			+ " values (?,?,?,?,?)";
+	private static final String INSERT_SQL_STATEMENT = "insert into tblInvoice(created_time, customer_id, status, export_employee_id, is_deleted, "
+			+ "payment_method, credit_card, delivery_address) values (?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_SQL_STATEMENT = "update tblInvoice set created_time = ?, customer_id = ?, status = ?, export_employee_id = ?, "
-			+ "is_deleted = ? where id = ?";
+			+ "is_deleted = ?, payment_method = ?, credit_card = ?, delivery_address = ? where id = ?";
 	
 	public ArrayList<Invoice> getAll() {
 		try {
@@ -37,6 +37,9 @@ public class InvoiceDAO extends DAO {
 				invoice.setStatus(rs.getString(4));
 				invoice.setExportEmployee(employeeDAO.getById(rs.getInt(5)));
 				invoice.setDeleted(rs.getBoolean(6));
+				invoice.setPaymentMethod(rs.getString(7));
+				invoice.setCreditCard(rs.getString(8));
+				invoice.setDeliveryAddress(rs.getString(9));
 				list.add(invoice);
 			}
 			statement.close();
@@ -65,6 +68,9 @@ public class InvoiceDAO extends DAO {
 				invoice.setStatus(rs.getString(4));
 				invoice.setExportEmployee(employeeDAO.getById(rs.getInt(5)));
 				invoice.setDeleted(rs.getBoolean(6));
+				invoice.setPaymentMethod(rs.getString(7));
+				invoice.setCreditCard(rs.getString(8));
+				invoice.setDeliveryAddress(rs.getString(9));
 				list.add(invoice);
 			}
 			statement.close();
@@ -95,6 +101,9 @@ public class InvoiceDAO extends DAO {
 				invoice.setStatus(rs.getString(4));
 				invoice.setExportEmployee(employeeDAO.getById(rs.getInt(5)));
 				invoice.setDeleted(rs.getBoolean(6));
+				invoice.setPaymentMethod(rs.getString(7));
+				invoice.setCreditCard(rs.getString(8));
+				invoice.setDeliveryAddress(rs.getString(9));
 			}
 			statement.close();
 			connection.close();
@@ -120,6 +129,13 @@ public class InvoiceDAO extends DAO {
 				statement.setInt(4, invoice.getExportEmployee().getId());
 			}
 			statement.setBoolean(5, invoice.isDeleted());
+			statement.setString(6, invoice.getPaymentMethod());
+			if (invoice.getExportEmployee() == null) {
+				statement.setNull(7, java.sql.Types.VARCHAR);
+			} else {				
+				statement.setString(7, invoice.getCreditCard());
+			}
+			statement.setString(8, invoice.getDeliveryAddress());
 
 			int affectedRows = statement.executeUpdate();
 			if (affectedRows == 0) {
@@ -155,7 +171,14 @@ public class InvoiceDAO extends DAO {
 				statement.setInt(4, invoice.getExportEmployee().getId());
 			}
 			statement.setBoolean(5, invoice.isDeleted());
-			statement.setInt(6, invoice.getId());
+			statement.setString(6, invoice.getPaymentMethod());
+			if (invoice.getExportEmployee() == null) {
+				statement.setNull(7, java.sql.Types.VARCHAR);
+			} else {				
+				statement.setString(7, invoice.getCreditCard());
+			}
+			statement.setString(8, invoice.getDeliveryAddress());
+			statement.setInt(9, invoice.getId());
 
 			int result = statement.executeUpdate();
 			
