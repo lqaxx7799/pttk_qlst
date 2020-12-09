@@ -130,7 +130,7 @@ public class InvoiceDAO extends DAO {
 			}
 			statement.setBoolean(5, invoice.isDeleted());
 			statement.setString(6, invoice.getPaymentMethod());
-			if (invoice.getExportEmployee() == null) {
+			if (invoice.getCreditCard() == null) {
 				statement.setNull(7, java.sql.Types.VARCHAR);
 			} else {				
 				statement.setString(7, invoice.getCreditCard());
@@ -172,7 +172,7 @@ public class InvoiceDAO extends DAO {
 			}
 			statement.setBoolean(5, invoice.isDeleted());
 			statement.setString(6, invoice.getPaymentMethod());
-			if (invoice.getExportEmployee() == null) {
+			if (invoice.getCreditCard() == null) {
 				statement.setNull(7, java.sql.Types.VARCHAR);
 			} else {				
 				statement.setString(7, invoice.getCreditCard());

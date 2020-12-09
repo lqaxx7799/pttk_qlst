@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.EmployeeDAO;
 import dao.InvoiceDAO;
 import dao.InvoiceDetailDAO;
+import model.Employee;
 import model.Invoice;
 import model.InvoiceDetail;
 
@@ -35,6 +37,7 @@ public class WaitingInvoiceDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		InvoiceDAO invoiceDAO = new InvoiceDAO();
 		InvoiceDetailDAO invoiceDetailDAO = new InvoiceDetailDAO();
+		EmployeeDAO employeeDAO = new EmployeeDAO();
 		
 		String invoiceIdString = request.getParameter("id");
 		int invoiceId = Integer.parseInt(invoiceIdString);
@@ -47,9 +50,20 @@ public class WaitingInvoiceDetailServlet extends HttpServlet {
 			totalMoney += invoiceDetail.getQuantity() * invoiceDetail.getUnitPrice();
 		}
 		
+		ArrayList<Employee> allEmployees = employeeDAO.getAll();
+		ArrayList<Employee> exportEmployees = new ArrayList<>();
+		
+		for(Employee employee : allEmployees) {
+			if (employee.getRole().getRoleName().equals("deliveryEmployee")) {
+				exportEmployees.add(employee);
+			}
+		}
+		
+		
 		request.setAttribute("invoice", invoice);
 		request.setAttribute("invoiceDetails", invoiceDetails);
 		request.setAttribute("totalMoney", totalMoney);
+		request.setAttribute("employees", exportEmployees);
 		request.setAttribute("titleName", "Xuất kho");
 		request.getRequestDispatcher("./waitingInvoiceDetail.jsp").forward(request, response);
 	}

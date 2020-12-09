@@ -36,21 +36,23 @@
 											</p>
 										</div>
 									</div>
-									<div class="tile is-parent is-2 level-item">
-										<div class="tile is-child">
-											<div class="field">
-												<label class="label">Số lượng:</label>
-												<div class="control">
-											    	<input type="text" class="input" class="txtQuantity" data-id="${item.id}" style="width: 70px" />
-											  	</div>
+									<c:if test="${not empty sessionScope.email}">
+										<div class="tile is-parent is-2 level-item">
+											<div class="tile is-child">
+												<div class="field">
+													<label class="label">Số lượng:</label>
+													<div class="control">
+												    	<input type="number" min="0" class="input" class="txtQuantity" data-id="${item.id}" style="width: 70px" />
+												  	</div>
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="tile is-parent is-2 level-item">
-										<div class="tile is-child">
-											<button class="button is-primary btnAddToCart" data-id="${item.id}">Thêm</button>
+										<div class="tile is-parent is-2 level-item">
+											<div class="tile is-child">
+												<button class="button is-primary btnAddToCart" data-id="${item.id}">Thêm</button>
+											</div>
 										</div>
-									</div>
+									</c:if>
 								</div>
 							</div>
 					  </article>
@@ -63,15 +65,11 @@
 			$('.btnAddToCart').click(function(e) {
 				const itemId = $(this).data('id');
 				const quantityStr = $(`input[data-id="\${itemId}"]`).val();
-				if (isNaN(quantityStr)) {
-					alert("Error");
+				if (!quantityStr || isNaN(quantityStr)) {
+					toastr['error']("Không được để trống số lượng");
 					return;
 				}
 				const quantity = parseInt(quantityStr);
-				if (quantity <= 0) {
-					alert("Error");
-					return;
-				}
 				const formData = new FormData();
 				formData.append('itemId', itemId);
 				formData.append('quantity', quantity);

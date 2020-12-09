@@ -98,7 +98,7 @@ public class ItemReportServlet extends HttpServlet {
 				result.add(e);
 			}
 			
-			result.sort((c1, c2) -> c1.getQuantity() - c2.getQuantity());
+			result.sort((c1, c2) -> (int)(c2.getQuantity() * c2.getItem().getUnitPrice() - c1.getQuantity() * c1.getItem().getUnitPrice()));
 			
 			request.setAttribute("titleName", "Xem báo cáo mặt hàng theo doanh thu");
 			request.setAttribute("itemReports", result);

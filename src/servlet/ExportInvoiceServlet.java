@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.EmployeeDAO;
 import dao.InvoiceDAO;
+import model.Employee;
 import model.Invoice;
 
 /**
@@ -42,15 +44,19 @@ public class ExportInvoiceServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String invoiceIdString = request.getParameter("txtInvoiceId");
-		String delivery = request.getParameter("txtDelivery");
+		String txtExportEmployee = request.getParameter("txtExportEmployee");
 		String status = request.getParameter("txtStatus");
 		
 		int invoiceId = Integer.parseInt(invoiceIdString);
 		
+		EmployeeDAO employeeDAO = new EmployeeDAO();
 		InvoiceDAO invoiceDAO = new InvoiceDAO();
+		
+		Employee employee = employeeDAO.getById(Integer.parseInt(txtExportEmployee));
 		
 		Invoice invoice = invoiceDAO.getById(invoiceId);
 		invoice.setStatus(status);
+		invoice.setExportEmployee(employee);
 		
 		invoiceDAO.update(invoice);
 		

@@ -121,11 +121,19 @@
 			
 			$('#formCart').submit(function(e) {
 				e.preventDefault();
-				
+				const formData = new FormData(this);
+				if (formData.get('txtPaymentMethod') === 'online' && !formData.get('txtCreditCard')) {
+					toastr['error']('Không thể kết nối đến thẻ');
+					return;
+				}
+				if (!formData.get('txtDeliveryAddres')) {
+					toastr['error']('Không được để trống địa chỉ giao hàng');
+					return;
+				}
 				$.ajax({
 					type: $(this).attr('method'),
 					url: $(this).attr('action'),
-					data: new FormData(this),
+					data: formData,
 	                contentType: false,
 	                processData: false,
 	                success: function(response) {

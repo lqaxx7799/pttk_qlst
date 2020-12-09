@@ -64,7 +64,7 @@
 		<c:if test="${invoice.paymentMethod eq 'online'}">
 			<div style="margin-top: 20px">
 				<div class="field">
-					<label class="label">Thẻ tín dụng</label>
+					<label class="label">Thẻ thanh toán</label>
 				 	<div class="control">
 				    	${invoice.creditCard}
 				  	</div>

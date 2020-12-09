@@ -59,12 +59,13 @@
 						</div>
 					</div>
 					<div class="field">
-						<label class="label">Chọn đơn vị vận chuyển</label>
+						<label class="label">Chọn nhân viên vận chuyển</label>
 						<div class="control">
 							<div class="select">
-					      		<select name="txtDelivery">
-					        		<option value="fastDelivery">Giao hàng nhanh</option>
-					        		<option value="savingDelivery">Giao hàng tiết kiệm</option>
+					      		<select name="txtExportEmployee">
+					      			<c:forEach items="${employees}" var="employee">
+					      				<option value="${employee.id}">${employee.userName}</option>
+					      			</c:forEach>					        		
 					      		</select>
 					    	</div>
 						</div>
