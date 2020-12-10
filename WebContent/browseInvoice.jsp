@@ -29,7 +29,10 @@
 						<tr>
 							<td>${loop.index}</td>
 							<td>${invoice.id}</td>
-							<td></td>
+							<td>
+								<div><strong>Người đặt: </strong>${invoice.customer.userName}</div>
+								<div><strong>Ngày đặt: </strong>${invoice.createdTime}</div>
+							</td>
 							<td>
 								<fmt:formatNumber type="number" maxFractionDigits="3" value="${totalMoneys[loop.index]}" />đ
 							</td>

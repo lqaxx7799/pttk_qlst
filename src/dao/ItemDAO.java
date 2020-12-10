@@ -67,7 +67,7 @@ public class ItemDAO extends DAO {
 				item.setCreatedTime(rs.getTimestamp(4));
 				item.setDeleted(rs.getBoolean(5));
 				item.setUnit(rs.getString(6));
-				item.setUnitPrice(rs.getFloat(6));
+				item.setUnitPrice(rs.getFloat(7));
 				item.setItemCategory(new ItemCategory());
 				item.setPictureUrl(rs.getString(8));
 				list.add(item);

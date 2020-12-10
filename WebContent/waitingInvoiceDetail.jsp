@@ -10,12 +10,23 @@
 			<div>
 				<strong>Mã đơn hàng: </strong><span>${invoice.id}</span><br/>
 				<strong>Tổng tiền: </strong><span><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalMoney}" />đ</span><br/>
+				<strong>Người đặt hàng: </strong><span>${invoice.customer.userName}</span><br/>
+				<strong>Thời gian đặt hàng: </strong><span>${invoice.createdTime}</span><br/>
 				<strong>Địa chỉ nhận hàng: </strong><span>${invoice.deliveryAddress}</span><br/>
-				<strong>Phương thức thanh toán: </strong><span>${invoice.paymentMethod}</span><br/>
-				<strong>Chi tiết đơn hàng: </strong>
+				<strong>Phương thức thanh toán: </strong>
+				<span>
+					<c:if test="${invoice.paymentMethod eq 'direct'}">
+						Thanh toán khi nhận hàng
+					</c:if>
+					<c:if test="${invoice.paymentMethod eq 'online'}">
+						Thanh toán online
+					</c:if>
+				</span>
+				<br/>
 			</div>
 		</div>
 		<div>
+			<div class="title" style="margin-bottom: 20px; margin-top: 20px;">Chi tiết đơn hàng: </div>
 			<table class="table is-striped">
 				<thead>
 					<tr>
@@ -93,7 +104,7 @@
 			});
 			
 			$('#btnPrint').click(function(e) {
-				toastr['warning']('Hệ thống chưa hỗ trợ tính năng này');
+				toastr['warning']('Thiết bị in không hoạt động. Kiểm tra lại thiết bị và thử lại');
 			})
 		</script>
 	</jsp:body>

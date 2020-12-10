@@ -50,9 +50,16 @@ public class ItemReportServlet extends HttpServlet {
 			return;
 		}
 		
-		if (fromDateString == "" || toDateString == "") {
+		if (fromDateString.equals("")) {
 			request.setAttribute("titleName", "Xem báo cáo mặt hàng theo doanh thu");
-			request.setAttribute("errorMessage", "Không được để trống");
+			request.setAttribute("errorMessage", "Ngày bắt đầu không được để trống");
+			request.getRequestDispatcher("./itemReport.jsp").forward(request, response);
+			return;
+		}
+		
+		if (toDateString.equals("")) {
+			request.setAttribute("titleName", "Xem báo cáo mặt hàng theo doanh thu");
+			request.setAttribute("errorMessage", "Ngày kết thúc không được để trống");
 			request.getRequestDispatcher("./itemReport.jsp").forward(request, response);
 			return;
 		}
@@ -64,7 +71,7 @@ public class ItemReportServlet extends HttpServlet {
 			
 			if (toDate.before(fromDate)) {
 				request.setAttribute("titleName", "Xem báo cáo mặt hàng theo doanh thu");
-				request.setAttribute("errorMessage", "Ngày kết thúc phải sau ngày bắt đầu");
+				request.setAttribute("errorMessage", "Ngày không hợp lệ");
 				request.getRequestDispatcher("./itemReport.jsp").forward(request, response);
 				return;
 			}
@@ -105,7 +112,10 @@ public class ItemReportServlet extends HttpServlet {
 			request.getRequestDispatcher("./itemReport.jsp").forward(request, response);
 			
 		} catch (ParseException e) {
-			
+			request.setAttribute("titleName", "Xem báo cáo mặt hàng theo doanh thu");
+			request.setAttribute("errorMessage", "Ngày sai định dạng");
+			request.getRequestDispatcher("./itemReport.jsp").forward(request, response);
+			return;
 		}
 	}
 

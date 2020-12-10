@@ -17,6 +17,7 @@
 				<h3 class="title is-3">Không tìm thấy mặt hàng</h3>
 			</c:if>
 			<c:if test="${not empty items}">
+				<div style="margin-bottom: 20px;" class="subtitle">Tìm thấy ${items.size()} mặt hàng</div>
 				<c:forEach items="${items}" var="item">
 					<div class="box">
 						<article class="media">
@@ -66,7 +67,7 @@
 				const itemId = $(this).data('id');
 				const quantityStr = $(`input[data-id="\${itemId}"]`).val();
 				if (!quantityStr || isNaN(quantityStr)) {
-					toastr['error']("Không được để trống số lượng");
+					toastr['error']("Số lượng không được để trống");
 					return;
 				}
 				const quantity = parseInt(quantityStr);
