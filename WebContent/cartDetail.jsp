@@ -126,7 +126,7 @@
 					toastr['error']('Không thể kết nối đến thẻ');
 					return;
 				}
-				if (!formData.get('txtDeliveryAddres')) {
+				if (!formData.get('txtDeliveryAddress')) {
 					toastr['error']('Không được để trống địa chỉ giao hàng');
 					return;
 				}

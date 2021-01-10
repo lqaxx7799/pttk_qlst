@@ -38,7 +38,7 @@
 <body>
 	<nav class="navbar" role="navigation" aria-label="main navigation">
 		<div class="navbar-brand">
-			<a class="navbar-item" href="https://bulma.io" href="./Index">
+			<a class="navbar-item" href="./Index">
 				<img src="./images/bulma-logo.png" width="112" height="28" />
 			</a>
 			
